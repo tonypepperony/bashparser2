@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">bashparser</string>
+    <string name="next">Next</string>
+    <string name="text">Welcome to bash parser</string>
 </resources>
