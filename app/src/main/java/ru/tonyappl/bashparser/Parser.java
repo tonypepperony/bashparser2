@@ -2,6 +2,7 @@ package ru.tonyappl.bashparser;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -17,24 +18,19 @@ public class Parser {
         List<Quote> quoteList = new ArrayList<>();
         Document doc = Jsoup.connect("http://bash.im").get();
 
-        Elements textElements = doc.getElementsByAttributeValue("class", "text");
+        Elements elements = doc.body().getElementsByAttributeValue("class", "text");
 
-        quoteList.add(new Quote(textElements.text()));
+        for (Element element : elements) {
+            quoteList.add(new Quote(element.text()));
+        }
 
         System.out.println(quoteList.get(0));
+
     }
 }
 
 class Quote {
     private String text;
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
 
     public Quote(String text) {
         this.text = text;
