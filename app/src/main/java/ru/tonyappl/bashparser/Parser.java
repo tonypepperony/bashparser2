@@ -21,10 +21,12 @@ public class Parser {
         Elements elements = doc.body().getElementsByAttributeValue("class", "text");
 
         for (Element element : elements) {
-            quoteList.add(new Quote(element.text()));
+            String text = element.html().replaceAll("<br>","");
+            //quoteList.add(new Quote(element.text().replaceAll("<br>","\n")));
+            quoteList.add(new Quote(text));
         }
 
-        System.out.println(quoteList.get(0));
+        System.out.println(quoteList.get(9));
 
     }
 }
