@@ -16,18 +16,24 @@ import java.util.List;
 public class Parser {
     public static void main(String[] args) throws IOException {
         List<Quote> quoteList = new ArrayList<>();
-        Document doc = Jsoup.connect("http://bash.im").get();
+        String error;
 
-        Elements elements = doc.body().getElementsByAttributeValue("class", "text");
+        try{
+            Document doc = Jsoup.connect("http://bash.im").get();
+            Elements elements = doc.body().getElementsByAttributeValue("class", "text");
 
-        for (Element element : elements) {
+            for (Element element : elements) {
             String text = element.html().replaceAll("<br>","");
             //quoteList.add(new Quote(element.text().replaceAll("<br>","\n")));
             quoteList.add(new Quote(text));
         }
 
-        System.out.println(quoteList.get(9));
+        System.out.println(quoteList.get(0));
 
+        }catch (Throwable t){
+            error = t.toString();
+            System.out.println(error);
+        }
     }
 }
 
